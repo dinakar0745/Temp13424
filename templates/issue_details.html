@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issue Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Issue Details</h1>
+        <div class="issue-details">
+            <p><strong>Issue ID:</strong> {{ issue[0] }}</p>
+            <p><strong>Title:</strong> {{ issue[1] }}</p>
+            <p><strong>Description:</strong> {{ issue[2] }}</p>
+            <form action="{{ url_for('update_status', issue_id=issue[0]) }}" method="POST">
+                <label for="status">Status:</label>
+                <select id="status" name="status">
+                    <option value="Open" {% if issue[3] == 'Open' %} selected {% endif %}>Open</option>
+                    <option value="In Progress" {% if issue[3] == 'In Progress' %} selected {% endif %}>In Progress</option>
+                    <option value="Resolved" {% if issue[3] == 'Resolved' %} selected {% endif %}>Resolved</option>
+                </select>
+                <input type="submit" value="Update Status">
+            </form>
+            <p><strong>Assigned User:</strong> {{ issue[4] }}</p>
+        </div>
+    </div>
+</body>
+</html>
